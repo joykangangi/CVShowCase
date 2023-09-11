@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 
 
 /**
- * Will be used for: Projects, Education, Volunteer
+ * Will be used for: Projects, Education, Volunteer, Certification
  */
 
 @Composable
