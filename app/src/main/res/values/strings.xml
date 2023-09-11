@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CVShowCase</string>
+    <string name="edit_top_bar">Edit CV</string>
+    <string name="close_icon">Close Icon</string>
+    <string name="edit_icon">Edit Icon</string>
+    <string name="contact_icon">Contact Icon</string>
+    <string name="cv_icon">CV Details Icon</string>
+    <string name="professional_skills">Professional Skills</string>
+    <string name="projects">Projects</string>
+    <string name="education">Education</string>
+    <string name="certs">Certifications</string>
 </resources>

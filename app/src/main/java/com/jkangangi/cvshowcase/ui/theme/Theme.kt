@@ -40,7 +40,7 @@ fun CVShowCaseTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = CVTypography,
         content = content
     )
 }
