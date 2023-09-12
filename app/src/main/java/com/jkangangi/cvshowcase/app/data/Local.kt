@@ -1,4 +1,10 @@
-package com.jkangangi.cvshowcase.app.util
+package com.jkangangi.cvshowcase.app.data
+
+import com.jkangangi.cvshowcase.cv.CVBody
+import com.jkangangi.cvshowcase.cv.CVState
+import com.jkangangi.cvshowcase.cv.Contact
+import com.jkangangi.cvshowcase.cv.Duration
+
 
 /**
  * This is the pre-populated data for the app.
@@ -48,7 +54,7 @@ private val initialProjects = listOf(
         details = "Collaborated with 4 Android Engineers in the design, implementation, and testing of Compose Form Builder, a software library to help in the state management of forms in Jetpack Compose. \n" +
                 "The product has received positive feedback with 154 stars and 17 forks on GitHub.",
         duration = Duration(
-            startingMonth = "April",
+            startingMonth = "Apr",
             startingYear = "2022",
             endingMonth = "May",
             endingYear = "2023"
@@ -78,7 +84,7 @@ private val initialVolunteer = listOf(
         duration = Duration(
             startingMonth = "Sep",
             startingYear = "2022",
-            endingMonth = "March",
+            endingMonth = "Mar",
             endingYear = "2023"
         )
     ),

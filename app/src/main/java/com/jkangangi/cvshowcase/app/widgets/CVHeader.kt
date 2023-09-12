@@ -1,9 +1,6 @@
 package com.jkangangi.cvshowcase.app.widgets
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.clickable
@@ -58,12 +55,6 @@ fun CVHeader(
 
     val bodyCardModifiers = modifier
         .fillMaxWidth()
-        .animateContentSize(
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessLow
-            )
-        )
         .clickable(
             indication = null,
             interactionSource = remember { MutableInteractionSource() },
@@ -92,10 +83,11 @@ fun CVHeader(
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             Icon(
+                                modifier = modifier.padding(start = 8.dp),
                                 imageVector = icon,
                                 contentDescription = stringResource(id = R.string.cv_icon)
                             )
-                            Spacer(modifier = modifier.width(4.dp))
+                            Spacer(modifier = modifier.width(6.dp))
                             Text(text = header, style = MaterialTheme.typography.titleMedium)
                             Spacer(modifier = modifier.weight(1f))
                             IconButton(

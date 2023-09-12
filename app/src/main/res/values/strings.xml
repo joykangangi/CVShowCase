@@ -6,7 +6,9 @@
     <string name="contact_icon">Contact Icon</string>
     <string name="cv_icon">CV Details Icon</string>
     <string name="professional_skills">Professional Skills</string>
+    <string name="soft_skills">Soft Skills</string>
     <string name="projects">Projects</string>
     <string name="education">Education</string>
     <string name="certs">Certifications</string>
+    <string name="volunteer">Volunteer</string>
 </resources>

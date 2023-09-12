@@ -1,4 +1,4 @@
-package com.jkangangi.cvshowcase.ui.theme
+package com.jkangangi.cvshowcase.app.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme

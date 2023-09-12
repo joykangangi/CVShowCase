@@ -1,4 +1,4 @@
-package com.jkangangi.cvshowcase.app.util
+package com.jkangangi.cvshowcase.cv
 
 import androidx.compose.runtime.Stable
 

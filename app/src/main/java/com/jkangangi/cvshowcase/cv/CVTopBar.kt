@@ -15,16 +15,16 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.jkangangi.cvshowcase.R
-import com.jkangangi.cvshowcase.ui.theme.CVShowCaseTheme
+import com.jkangangi.cvshowcase.app.theme.CVShowCaseTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CVTopAppBar(modifier: Modifier = Modifier, onEdit: () -> Unit) {
 
-    val scrollBehaviour = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     TopAppBar(
-        title = { Text(text = "") },
+        title = { Text(text = "Resumé") },
         modifier = modifier.nestedScroll(scrollBehaviour.nestedScrollConnection),
         actions = {
             IconButton(

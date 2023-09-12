@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import com.jkangangi.cvshowcase.ui.theme.CVShowCaseTheme
+import com.jkangangi.cvshowcase.app.theme.CVShowCaseTheme
 
 @Composable
 fun DescriptionText(
@@ -19,7 +19,7 @@ fun DescriptionText(
 ) {
     Text(
         text = description,
-        style = MaterialTheme.typography.bodyLarge,
+        style = MaterialTheme.typography.titleSmall,
         modifier = modifier.clickable(enabled = isClickable, onClick = onTextClick),
         textDecoration = if (isClickable) TextDecoration.Underline else TextDecoration.None,
     )

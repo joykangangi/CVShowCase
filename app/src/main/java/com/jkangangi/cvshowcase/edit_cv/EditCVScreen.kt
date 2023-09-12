@@ -1,5 +1,7 @@
 package com.jkangangi.cvshowcase.edit_cv
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -18,6 +20,12 @@ fun EditCVScreen(modifier: Modifier, onClose: () -> Unit) {
         },
         content = { innerPadding ->
 // todo personal det, professional, button, state class with values initially
+            Column(
+                modifier = modifier.padding(innerPadding),
+                content = {
+
+                }
+            )
 
         }
     )
