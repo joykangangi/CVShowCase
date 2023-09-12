@@ -1,8 +1,5 @@
 package com.jkangangi.cvshowcase.cv
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -42,21 +39,17 @@ import com.jkangangi.cvshowcase.app.widgets.Contact
 fun CVScreen(
     modifier: Modifier = Modifier,
     state: CVState,
+    onEdit: () -> Unit,
+    onLinkClick: (String) -> Unit,
 ) {
 
     Scaffold(
-        topBar = { CVTopAppBar(onEdit = {  }) },
+        topBar = { CVTopAppBar(onEdit = onEdit) },
         content = { innerPadding ->
             Column(
                 modifier = modifier
                     .padding(innerPadding)
                     .padding(12.dp)
-                    .animateContentSize(
-                        animationSpec = spring(
-                            dampingRatio = Spring.DampingRatioMediumBouncy,
-                            stiffness = Spring.StiffnessLow
-                        )
-                    )
                     .verticalScroll(rememberScrollState()),
                 content = {
                     BioSection(
@@ -67,19 +60,18 @@ fun CVScreen(
                     ContactsSection(
                         slackUserName = state.contact.slackUserName,
                         gitHub = state.contact.gitHub,
-                        onGitClick = {  },
-                        email = state.contact.email,
-                        onEmailClick = {  }
+                        onGitClick = { onLinkClick(state.contact.gitHub) },
+                        email = state.contact.email
                     )
                     TechSkills(professionalSkills = state.techSkills)
                     SoftSkills(softSkills = state.softSkills)
                     Projects(
                         projects = state.projects,
-                        onProjectClick = { }
+                        onProjectClick = { onLinkClick(it) }
                     )
                     Education(schools = state.education)
                     Volunteer(volunteers = state.volunteer)
-                    Certifications(certs = state.certifications, onCertClick = { })
+                    Certifications(certs = state.certifications, onCertClick = { onLinkClick(it) })
                 },
             )
         }
@@ -119,22 +111,21 @@ private fun ContactsSection(
     gitHub: String,
     onGitClick: () -> Unit,
     email: String,
-    onEmailClick: () -> Unit,
 ) {
     Column(
         modifier = modifier.height(IntrinsicSize.Min),
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
-            Contact(iconId = R.drawable.github, contact = gitHub, onContactClick = onGitClick)
+            Contact(iconId = R.drawable.github, contact = gitHub, isClickable = true ,onContactClick = onGitClick)
             Contact(iconId = R.drawable.slack, contact = slackUserName)
-            Contact(iconId = R.drawable.email, contact = email, onContactClick = onEmailClick)
+            Contact(iconId = R.drawable.email, contact = email)
         }
     )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun TechSkills(modifier: Modifier = Modifier, professionalSkills: List<String>) {
+private fun TechSkills(modifier: Modifier = Modifier, professionalSkills: List<String>) {
 
     CVHeader(
         icon = Icons.Default.Build,
@@ -178,7 +169,7 @@ private fun SoftSkills(modifier: Modifier = Modifier, softSkills: List<String>) 
 private fun Projects(
     modifier: Modifier = Modifier,
     projects: List<CVBody>,
-    onProjectClick: () -> Unit,
+    onProjectClick: (String) -> Unit,
 ) {
     CVHeader(
         icon = Icons.Default.Work,
@@ -194,7 +185,7 @@ private fun Projects(
                     endingMonth = project.duration.endingMonth,
                     endingYear = project.duration.endingYear,
                     isClickable = true,
-                    onTextClick = { onProjectClick() },
+                    onTextClick = { onProjectClick(project.description) },
                     modifier = modifier,
                 )
             }
@@ -258,7 +249,7 @@ private fun Volunteer(
 private fun Certifications(
     modifier: Modifier = Modifier,
     certs: List<CVBody>,
-    onCertClick: () -> Unit,
+    onCertClick: (String) -> Unit,
 ) {
     CVHeader(
         icon = Icons.Default.Anchor,
@@ -274,7 +265,7 @@ private fun Certifications(
                 endingMonth = cert.duration.endingMonth,
                 endingYear = cert.duration.endingYear,
                 isClickable = true,
-                onTextClick = onCertClick,
+                onTextClick = { onCertClick(cert.description) },
                 modifier = modifier,
             )
         }
@@ -283,9 +274,9 @@ private fun Certifications(
 
 @Preview
 @Composable
-fun PrevCVScreen() {
+private fun PrevCVScreen() {
     CVShowCaseTheme {
         val initialState = StartingCV.initialCVState
-        CVScreen(state = initialState)
+        CVScreen(state = initialState, onEdit = { }, onLinkClick = { } )
     }
 }

@@ -11,4 +11,15 @@
     <string name="education">Education</string>
     <string name="certs">Certifications</string>
     <string name="volunteer">Volunteer</string>
+    <string name="input_err">Input Should not be empty</string>
+    <string name="personal_info">Personal Info</string>
+
+    <string name="edit_persono">Edit Personal Details</string>
+    <string name="edit_contacts">Edit Contacts</string>
+    <string name="edit_tech">Edit Technical Skills</string>
+    <string name="edit_soft">Edit Soft Skills</string>
+    <string name="edit_proj">Edit Project Details</string>
+    <string name="edit_edu">Edit School Details</string>
+    <string name="edit_volunteer">Edit Volunteer Details</string>
+    <string name="edit_cert">Edit Certifications</string>
 </resources>
