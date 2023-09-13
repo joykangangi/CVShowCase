@@ -45,7 +45,7 @@ fun Contact(
 @Composable
 fun PrevContact() {
     CVShowCaseTheme {
-        Contact(iconId = R.drawable.email, contact = "joykangangi@gmail.com")
+        Contact(iconId = R.drawable.email, contact = "test@gmail.com")
     }
 
 }

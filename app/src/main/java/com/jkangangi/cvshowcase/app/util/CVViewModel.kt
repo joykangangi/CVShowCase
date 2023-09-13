@@ -29,8 +29,6 @@ class CVViewModel : ViewModel() {
     private val _screen = MutableStateFlow(0)
     val screen = _screen.asStateFlow()
 
-    private var instance = 0
-
     fun updateCV(state: CVState) {
         _cvState.update { state }
     }
@@ -39,11 +37,32 @@ class CVViewModel : ViewModel() {
         viewModelScope.launch {
             _cvState.value = initialState
         }
-        Log.i("VM INSTANCE", "INSTANCE = ${instance++}")
     }
 
+    fun onSoftSkillDeleted(skill: String) {
+        viewModelScope.launch {
+            val updatedSoftSkills = _cvState.value.softSkills.toMutableList()
+            if (updatedSoftSkills.remove(skill)) {
+                _cvState.update { it.copy(softSkills = updatedSoftSkills) }
+                Log.i("VM INSTANCE", "STATE = ${_cvState.value.softSkills}")
+            }
+        }
+    }
+
+    fun onTechSkillDeleted(skill: String) {
+        viewModelScope.launch {
+            val updatedTechSkills = _cvState.value.techSkills.toMutableList()
+            if (updatedTechSkills.remove(skill)) {
+                _cvState.update { it.copy(techSkills = updatedTechSkills) }
+            }
+        }
+    }
+
+
     fun navigate(screen: Int) {
-        _screen.value = screen
+        viewModelScope.launch {
+            _screen.value = screen
+        }
     }
 
     fun onLinkClicked(webUrl: String, context: Context) {
@@ -56,9 +75,6 @@ class CVViewModel : ViewModel() {
             }
         }
     }
-
-
-    //Todo Implement State Update to Screens
 
 
 }

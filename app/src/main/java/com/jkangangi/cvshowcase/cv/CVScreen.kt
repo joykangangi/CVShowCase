@@ -177,13 +177,7 @@ private fun Projects(
         body = {
             projects.forEach { project ->
                 CVBody(
-                    title = project.title,
-                    description = project.description,
-                    detail = project.details,
-                    startingMonth = project.duration.startingMonth,
-                    startingYear = project.duration.startingYear,
-                    endingMonth = project.duration.endingMonth,
-                    endingYear = project.duration.endingYear,
+                    body = project,
                     isClickable = true,
                     onTextClick = { onProjectClick(project.description) },
                     modifier = modifier,
@@ -205,17 +199,10 @@ private fun Education(
         body = {
             schools.forEach { school ->
                 CVBody(
-                    title = school.title,
-                    description = school.description,
-                    detail = school.details,
-                    startingMonth = school.duration.startingMonth,
-                    startingYear = school.duration.startingYear,
-                    endingMonth = school.duration.endingMonth,
-                    endingYear = school.duration.endingYear,
+                    body = school,
                     modifier = modifier
                 )
             }
-
         }
     )
 }
@@ -231,13 +218,7 @@ private fun Volunteer(
         body = {
             volunteers.forEach { volunteer ->
                 CVBody(
-                    title = volunteer.title,
-                    description = volunteer.description,
-                    detail = volunteer.details,
-                    startingMonth = volunteer.duration.startingMonth,
-                    startingYear = volunteer.duration.startingYear,
-                    endingMonth = volunteer.duration.endingMonth,
-                    endingYear = volunteer.duration.endingYear,
+                    body = volunteer,
                     modifier = modifier
                 )
             }
@@ -257,13 +238,7 @@ private fun Certifications(
     ) {
         certs.forEach { cert ->
             CVBody(
-                title = cert.title,
-                description = cert.description,
-                detail = cert.details,
-                startingMonth = cert.duration.startingMonth,
-                startingYear = cert.duration.startingYear,
-                endingMonth = cert.duration.endingMonth,
-                endingYear = cert.duration.endingYear,
+                body = cert,
                 isClickable = true,
                 onTextClick = { onCertClick(cert.description) },
                 modifier = modifier,

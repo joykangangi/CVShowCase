@@ -1,12 +1,20 @@
 package com.jkangangi.cvshowcase.edit_cv
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Anchor
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.FrontHand
+import androidx.compose.material.icons.filled.Handshake
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Work
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,12 +28,16 @@ import com.jkangangi.cvshowcase.app.theme.CVShowCaseTheme
 import com.jkangangi.cvshowcase.app.widgets.CVHeader
 import com.jkangangi.cvshowcase.app.widgets.TextInput
 import com.jkangangi.cvshowcase.cv.CVState
+import com.jkangangi.cvshowcase.edit_cv.components.EditChip
+import com.jkangangi.cvshowcase.edit_cv.components.EditList
 
 @Composable
 fun EditCVScreen(
     modifier: Modifier = Modifier,
     state: CVState,
     updateCV: (CVState) -> Unit,
+    onDeleteSoftSkill: (String) -> Unit,
+    onDeleteTechSkill: (String) -> Unit,
     onSave: () -> Unit,
 ) {
     Scaffold(
@@ -34,11 +46,37 @@ fun EditCVScreen(
             Column(
                 modifier = modifier
                     .padding(innerPadding)
-                    .padding(12.dp),
+                    .padding(12.dp)
+                    .verticalScroll(rememberScrollState()),
                 content = {
                     EditPersonalInfo(state = state, updateCV = updateCV)
                     EditContact(state = state, updateCV = updateCV)
-
+                    EditTechSkills(state = state, onDeleteSkill = onDeleteTechSkill)
+                    EditSoftSkills(state = state, onDeleteSkill = onDeleteSoftSkill)
+                    EditList(
+                        items = state.projects,
+                        updateCV = { newProjects -> updateCV(state.copy(projects = newProjects)) } ,
+                        icon =  Icons.Default.Work,
+                        header = R.string.edit_proj
+                    )
+                    EditList(
+                        items = state.education,
+                        updateCV = { newSchools -> updateCV(state.copy(education = newSchools)) } ,
+                        icon =  Icons.Default.School,
+                        header = R.string.edit_edu
+                    )
+                    EditList(
+                        items = state.volunteer,
+                        updateCV = { newVolunteer -> updateCV(state.copy(volunteer = newVolunteer)) } ,
+                        icon =  Icons.Default.FrontHand,
+                        header = R.string.edit_volunteer
+                    )
+                    EditList(
+                        items = state.certifications,
+                        updateCV = { newCerts -> updateCV(state.copy(projects = newCerts)) } ,
+                        icon =  Icons.Default.Anchor,
+                        header = R.string.edit_cert
+                    )
                 }
             )
         }
@@ -103,25 +141,13 @@ private fun EditContact(
                     )
                     TextInput(
                         input = state.contact.slackUserName,
-                        onInputChange = {
-                            updateCV(
-                                state.copy(
-                                    contact = state.contact.copy(slackUserName = it)
-                                )
-                            )
-                        },
+                        onInputChange = { updateCV(state.copy(contact = state.contact.copy(slackUserName = it))) },
                         txtLabel = "Slack UserName"
                     )
 
                     TextInput(
                         input = state.contact.email,
-                        onInputChange = {
-                            updateCV(
-                                state.copy(
-                                    contact = state.contact.copy(email = it)
-                                )
-                            )
-                        },
+                        onInputChange = { updateCV(state.copy(contact = state.contact.copy(email = it))) },
                         txtLabel = "Email"
                     )
                 }
@@ -130,11 +156,12 @@ private fun EditContact(
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun EditTechSkills(
     modifier: Modifier = Modifier,
     state: CVState,
-    updateCV: (CVState) -> Unit
+    onDeleteSkill: (String) -> Unit,
 ) {
     CVHeader(
         icon = Icons.Default.Build,
@@ -143,12 +170,16 @@ private fun EditTechSkills(
             Column(
                 modifier = modifier.padding(5.dp),
                 content = {
-                    Row(
+                    FlowRow(
+                        maxItemsInEachRow = 4,
                         modifier = modifier.padding(5.dp),
                         content = {
-                            TextInput(input = "", onInputChange = {
-                                updateCV(state.copy(techSkills = state.techSkills.add(it)))
-                            }, txtLabel = "Skills")
+                            state.techSkills.forEach { skill ->
+                                EditChip(
+                                    onDelete = { onDeleteSkill(it) },
+                                    chipText = skill
+                                )
+                            }
                         }
                     )
                 }
@@ -158,12 +189,50 @@ private fun EditTechSkills(
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun EditSoftSkills(
+    modifier: Modifier = Modifier,
+    state: CVState,
+    onDeleteSkill: (String) -> Unit,
+) {
+    CVHeader(
+        icon = Icons.Default.Handshake,
+        header = stringResource(id = R.string.edit_soft),
+        body = {
+            Column(
+                modifier = modifier.padding(5.dp),
+                content = {
+                    FlowRow(
+                        maxItemsInEachRow = 4,
+                        modifier = modifier.padding(5.dp),
+                        content = {
+                            state.softSkills.forEach { skill ->
+                                EditChip(
+                                    onDelete = { onDeleteSkill(it) },
+                                    chipText = skill
+                                )
+                            }
+                        }
+                    )
+                }
+            )
+        }
+    )
+}
+
+
 @Preview
 @Composable
 fun PrevEditScreen() {
     CVShowCaseTheme {
         val initialState = StartingCV.initialCVState
-        EditCVScreen(state = initialState, updateCV = { }, onSave = { })
+        EditCVScreen(
+            state = initialState,
+            updateCV = { },
+            onSave = { },
+            onDeleteSoftSkill = { },
+            onDeleteTechSkill = { },
+        )
     }
-
 }

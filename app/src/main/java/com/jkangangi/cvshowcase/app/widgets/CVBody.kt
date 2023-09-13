@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jkangangi.cvshowcase.cv.CVBody
 
 
 /**
@@ -22,16 +23,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CVBody(
     modifier: Modifier = Modifier,
-    title: String,
-    description: String,
-    detail: String,
-    startingMonth: String,
-    startingYear: String,
-    endingMonth: String,
-    endingYear: String,
+    body: CVBody,
     isClickable: Boolean = false,
     onTextClick: () -> Unit = { },
-    ) {
+) {
     Column(
         modifier = modifier.padding(8.dp),
         content = {
@@ -42,20 +37,25 @@ fun CVBody(
                 content = {
                     Text(
                         modifier = modifier.weight(.1f),
-                        text = title,
-                        style = MaterialTheme.typography.bodyMedium)
+                        text = body.title,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                     DateSection(
                         modifier = modifier.weight(.1f),
-                        startingMonth = startingMonth ,
-                        startingYear = startingYear ,
-                        endingMonth = endingMonth,
-                        endingYear = endingYear
+                        startingMonth = body.duration.startingMonth,
+                        startingYear = body.duration.startingYear,
+                        endingMonth = body.duration.endingMonth,
+                        endingYear = body.duration.endingYear
                     )
                 }
             )
-            DescriptionText(description = description, isClickable = isClickable, onTextClick = onTextClick)
+            DescriptionText(
+                description = body.description,
+                isClickable = isClickable,
+                onTextClick = onTextClick
+            )
             Spacer(modifier = modifier.height(5.dp))
-            Text(text = detail, style = MaterialTheme.typography.bodyLarge)
+            Text(text = body.details, style = MaterialTheme.typography.bodyLarge)
         }
     )
 }

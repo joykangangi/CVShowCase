@@ -120,7 +120,7 @@ private val initialCerts = listOf(
         title = "KamiLimu Apprentice Program, Kenya",
         description = "https://www.linkedin.com/company/kamilimumentorship/",
         details = "I was selected to be 1 of the 33 mentees of the 7th cohort of KamiLimu which had an acceptance rate of 25%. \n " +
-                "During this enriching 8-month mentorship experience, I not only participated in the semi-finals of all competitions but also advanced to the final stage in the Innovation and ICT skills and Professional Development competitions.",
+                "Teamed-up with 3 software engineers to develop an organic fertilizer recommender system.",
         duration = Duration(
             startingMonth = "Sep",
             startingYear = "2022",

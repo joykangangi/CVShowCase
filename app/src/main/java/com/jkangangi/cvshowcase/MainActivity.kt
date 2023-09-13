@@ -39,7 +39,10 @@ class MainActivity : ComponentActivity() {
                     1 -> EditCVScreen(
                         state = state,
                         updateCV = viewModel::updateCV,
-                        onSave = { viewModel.navigate(0) })
+                        onSave = { viewModel.navigate(0) },
+                        onDeleteTechSkill = viewModel::onTechSkillDeleted,
+                        onDeleteSoftSkill = viewModel::onSoftSkillDeleted,
+                    )
                 }
             }
         }
