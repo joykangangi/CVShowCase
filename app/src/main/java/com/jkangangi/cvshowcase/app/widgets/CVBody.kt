@@ -49,12 +49,13 @@ fun CVBody(
                     )
                 }
             )
+            Spacer(modifier = modifier.height(10.dp))
             DescriptionText(
                 description = body.description,
                 isClickable = isClickable,
                 onTextClick = onTextClick
             )
-            Spacer(modifier = modifier.height(5.dp))
+            Spacer(modifier = modifier.height(10.dp))
             Text(text = body.details, style = MaterialTheme.typography.bodyLarge)
         }
     )

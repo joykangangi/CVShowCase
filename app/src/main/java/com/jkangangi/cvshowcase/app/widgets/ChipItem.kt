@@ -18,7 +18,7 @@ import com.jkangangi.cvshowcase.app.theme.CVShowCaseTheme
 fun ChipItem(modifier: Modifier = Modifier, chipText: String) {
     Box(
         modifier = modifier
-            .padding(3.dp)
+            .padding(5.dp)
             .clip(RoundedCornerShape(15))
             .border(width = 1.dp, color = MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center,

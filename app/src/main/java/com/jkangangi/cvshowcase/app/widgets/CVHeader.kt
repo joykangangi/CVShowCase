@@ -72,7 +72,13 @@ fun CVHeader(
     Column(
         content = {
             ElevatedCard(
-                modifier = modifier.padding(5.dp),
+                modifier = modifier
+                    .padding(5.dp)
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() },
+                        onClick = onArrowClick,
+                    ),
                 colors = CardDefaults.elevatedCardColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary

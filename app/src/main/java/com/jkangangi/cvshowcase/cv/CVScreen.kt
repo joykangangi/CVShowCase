@@ -57,6 +57,7 @@ fun CVScreen(
                         role = state.jobRole,
                         bio = state.bio
                     )
+                    Spacer(modifier = modifier.height(5.dp))
                     ContactsSection(
                         slackUserName = state.contact.slackUserName,
                         gitHub = state.contact.gitHub,

@@ -91,16 +91,16 @@ fun EditCVBody(
 
 
 @Composable
-fun EditList(
+fun EditBodySection(
     modifier: Modifier = Modifier,
     items: List<CVBody>,
     updateCV: (List<CVBody>) -> Unit,
     icon: ImageVector,
-    header: Int,
+    headerID: Int,
 ) {
     CVHeader(
         icon = icon,
-        header = stringResource(id = header),
+        header = stringResource(id = headerID),
         body = {
             items.forEach { item ->
                 EditCVBody(

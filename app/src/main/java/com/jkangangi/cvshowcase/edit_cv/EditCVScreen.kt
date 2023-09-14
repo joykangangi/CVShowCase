@@ -28,8 +28,8 @@ import com.jkangangi.cvshowcase.app.theme.CVShowCaseTheme
 import com.jkangangi.cvshowcase.app.widgets.CVHeader
 import com.jkangangi.cvshowcase.app.widgets.TextInput
 import com.jkangangi.cvshowcase.cv.CVState
+import com.jkangangi.cvshowcase.edit_cv.components.EditBodySection
 import com.jkangangi.cvshowcase.edit_cv.components.EditChip
-import com.jkangangi.cvshowcase.edit_cv.components.EditList
 
 @Composable
 fun EditCVScreen(
@@ -53,29 +53,29 @@ fun EditCVScreen(
                     EditContact(state = state, updateCV = updateCV)
                     EditTechSkills(state = state, onDeleteSkill = onDeleteTechSkill)
                     EditSoftSkills(state = state, onDeleteSkill = onDeleteSoftSkill)
-                    EditList(
+                    EditBodySection(
                         items = state.projects,
                         updateCV = { newProjects -> updateCV(state.copy(projects = newProjects)) } ,
                         icon =  Icons.Default.Work,
-                        header = R.string.edit_proj
+                        headerID = R.string.edit_proj
                     )
-                    EditList(
+                    EditBodySection(
                         items = state.education,
                         updateCV = { newSchools -> updateCV(state.copy(education = newSchools)) } ,
                         icon =  Icons.Default.School,
-                        header = R.string.edit_edu
+                        headerID = R.string.edit_edu
                     )
-                    EditList(
+                    EditBodySection(
                         items = state.volunteer,
                         updateCV = { newVolunteer -> updateCV(state.copy(volunteer = newVolunteer)) } ,
                         icon =  Icons.Default.FrontHand,
-                        header = R.string.edit_volunteer
+                        headerID = R.string.edit_volunteer
                     )
-                    EditList(
+                    EditBodySection(
                         items = state.certifications,
                         updateCV = { newCerts -> updateCV(state.copy(projects = newCerts)) } ,
                         icon =  Icons.Default.Anchor,
-                        header = R.string.edit_cert
+                        headerID = R.string.edit_cert
                     )
                 }
             )

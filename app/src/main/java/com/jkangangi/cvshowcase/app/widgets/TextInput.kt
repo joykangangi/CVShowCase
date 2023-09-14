@@ -1,6 +1,7 @@
 package com.jkangangi.cvshowcase.app.widgets
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -19,7 +20,7 @@ fun TextInput(
     Column(
         content = {
             OutlinedTextField(
-                modifier = modifier,
+                modifier = modifier.fillMaxWidth(),
                 value = input,
                 onValueChange = onInputChange,
                 textStyle = MaterialTheme.typography.bodyLarge,
