@@ -19,7 +19,7 @@ fun ChipItem(modifier: Modifier = Modifier, chipText: String) {
     Box(
         modifier = modifier
             .padding(5.dp)
-            .clip(RoundedCornerShape(15))
+            .clip(RoundedCornerShape(8))
             .border(width = 1.dp, color = MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center,
         content = {

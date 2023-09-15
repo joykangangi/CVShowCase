@@ -29,7 +29,7 @@ fun EditChip(
     Box(
         modifier = modifier
             .padding(3.dp)
-            .clip(RoundedCornerShape(15))
+            .clip(RoundedCornerShape(8))
             .border(width = 1.dp, color = MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center,
         content = {

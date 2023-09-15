@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -44,7 +43,6 @@ class CVViewModel : ViewModel() {
             val updatedSoftSkills = _cvState.value.softSkills.toMutableList()
             if (updatedSoftSkills.remove(skill)) {
                 _cvState.update { it.copy(softSkills = updatedSoftSkills) }
-                Log.i("VM INSTANCE", "STATE = ${_cvState.value.softSkills}")
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.jkangangi.cvshowcase.edit_cv
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -73,7 +74,7 @@ fun EditCVScreen(
                     )
                     EditBodySection(
                         items = state.certifications,
-                        updateCV = { newCerts -> updateCV(state.copy(projects = newCerts)) } ,
+                        updateCV = { newCerts -> updateCV(state.copy(certifications = newCerts)) } ,
                         icon =  Icons.Default.Anchor,
                         headerID = R.string.edit_cert
                     )
@@ -95,7 +96,7 @@ private fun EditPersonalInfo(
         body = {
             Column(
                 modifier = modifier.padding(8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
                 content = {
                     TextInput(
                         input = state.fullName,
@@ -113,7 +114,6 @@ private fun EditPersonalInfo(
                         onInputChange = { updateCV(state.copy(bio = it)) },
                         txtLabel = "About Me"
                     )
-
                 }
             )
         }

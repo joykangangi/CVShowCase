@@ -1,5 +1,6 @@
 package com.jkangangi.cvshowcase.app.widgets
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
@@ -93,7 +94,7 @@ fun CVHeader(
                                 imageVector = icon,
                                 contentDescription = stringResource(id = R.string.cv_icon)
                             )
-                            Spacer(modifier = modifier.width(6.dp))
+                            Spacer(modifier = modifier.width(8.dp))
                             Text(text = header, style = MaterialTheme.typography.titleMedium)
                             Spacer(modifier = modifier.weight(1f))
                             IconButton(
@@ -109,7 +110,9 @@ fun CVHeader(
                     )
                 },
             )
-            if (isExpanded) {
+
+            AnimatedVisibility(visible = isExpanded) {
+
                 ElevatedCard(
                     modifier = bodyCardModifiers,
                     content = body

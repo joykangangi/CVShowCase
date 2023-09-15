@@ -2,18 +2,20 @@ package com.jkangangi.cvshowcase.edit_cv.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jkangangi.cvshowcase.app.theme.CVShowCaseTheme
 import com.jkangangi.cvshowcase.app.widgets.CVHeader
 import com.jkangangi.cvshowcase.app.widgets.TextInput
 import com.jkangangi.cvshowcase.cv.CVBody
+import com.jkangangi.cvshowcase.cv.Duration
 
 
 /**
@@ -21,7 +23,7 @@ import com.jkangangi.cvshowcase.cv.CVBody
  */
 
 @Composable
-fun EditCVBody(
+private fun EditCVBody(
     modifier: Modifier = Modifier,
     body: CVBody,
     updateBody: (CVBody) -> Unit,
@@ -35,6 +37,57 @@ fun EditCVBody(
                 onInputChange = { updateBody(body.copy(title = it)) },
                 txtLabel = "Title"
             )
+            EditDate(
+                month = body.duration.startingMonth,
+                onMonthChanged = {
+                    updateBody(
+                        body.copy(
+                            duration = body.duration.copy(
+                                startingMonth = it
+                            )
+                        )
+                    )
+                },
+                txtLabelMonth = "Starting Month",
+                year = body.duration.startingYear,
+                onYearChanged = {
+                    updateBody(
+                        body.copy(
+                            duration = body.duration.copy(
+                                startingYear = it
+                            )
+                        )
+                    )
+                },
+                txtLabelYear = "Starting Year"
+            )
+
+            EditDate(
+                month = body.duration.endingMonth,
+                onMonthChanged = {
+                    updateBody(
+                        body.copy(
+                            duration = body.duration.copy(
+                                endingMonth = it
+                            )
+                        )
+                    )
+                },
+                txtLabelMonth = "Ending Month",
+                year = body.duration.endingYear,
+                onYearChanged = {
+                    updateBody(
+                        body.copy(
+                            duration = body.duration.copy(
+                                endingYear = it
+                            )
+                        )
+                    )
+                },
+                txtLabelYear = "Ending Year"
+            )
+
+
             TextInput(
                 input = body.description,
                 onInputChange = { updateBody(body.copy(description = it)) },
@@ -46,45 +99,7 @@ fun EditCVBody(
                 txtLabel = "Details"
             )
 
-            Row(
-                modifier = modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                content = {
-                    TextInput(
-                        modifier = modifier.weight(.1f),
-                        input = body.duration.startingMonth,
-                        onInputChange = { updateBody(body.copy(duration = body.duration.copy(startingMonth = it))) },
-                        txtLabel = "Starting Month"
-                    )
-
-                    TextInput(
-                        modifier = modifier.weight(.1f) ,
-                        input = body.duration.startingYear,
-                        onInputChange = { updateBody(body.copy(duration = body.duration.copy(startingYear = it))) } ,
-                        txtLabel = "Starting Year"
-                    )
-                }
-            )
-
-            Row(
-                modifier = modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                content = {
-                    TextInput(
-                        modifier = modifier.weight(.1f),
-                        input = body.duration.endingMonth,
-                        onInputChange = { updateBody(body.copy(duration = body.duration.copy(endingMonth = it))) },
-                        txtLabel = "Ending Month"
-                    )
-
-                    TextInput(
-                        modifier = modifier.weight(.1f) ,
-                        input = body.duration.endingYear,
-                        onInputChange = { updateBody(body.copy(duration = body.duration.copy(endingYear = it))) } ,
-                        txtLabel = "Ending Year"
-                    )
-                }
-            )
+            Spacer(modifier = modifier.height(5.dp))
         }
     )
 }
@@ -106,8 +121,12 @@ fun EditBodySection(
                 EditCVBody(
                     body = item,
                     updateBody = { updatedItem ->
+                        // For each project, check if it matches the current project.
+                        // If it matches, replace it with the updated project.
+                        // If it doesn't match, keep the project unchanged.
                         val updatedItems = items.map { cvBody ->
-                                 if (cvBody == item) updatedItem else cvBody }
+                            if (cvBody == item) updatedItem else cvBody
+                        }
                         updateCV(updatedItems)
                     },
                     modifier = modifier,
@@ -115,4 +134,24 @@ fun EditBodySection(
             }
         }
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PrevEditCVBody() {
+    CVShowCaseTheme {
+        val prevBody = CVBody(
+            title = "Android Intern",
+            description = "HNG Internship",
+            details = "Worked with backend and design engineers to build a mobile app",
+            duration = Duration(
+                startingMonth = "Sep",
+                startingYear = "2023",
+                endingMonth = "Nov",
+                endingYear = "2023"
+            )
+        )
+
+        EditCVBody(body = prevBody, updateBody = { })
+    }
 }
